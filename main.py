@@ -46,5 +46,10 @@ async def concat_strings_parent(a: str, b: str, c: str, d: str) -> str:
   )
   return concat_strings(second=s1, first=s2)
 
+# A task with a default argument
+@task
+def calculate_square_with_default(a: int = 1) -> int:
+  return a * a
+
 if __name__ == "__main__":
   start() # SDK entry point, required for all workflow services
