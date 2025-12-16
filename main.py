@@ -33,5 +33,18 @@ def flip_coin() -> str:
     raise Exception("Flipped tails! Retrying.")
   return "Flipped heads!"
 
+# A task for testing calling with named arguments
+@task
+def concat_strings(first: str, second: str) -> str:
+  return first + second
+
+@task
+async def concat_strings_parent(a: str, b: str, c: str, d: str) -> str:
+  s1, s2 = await asyncio.gather(
+    concat_strings(second=a, first=b),
+    concat_strings(second=c, first=d)
+  )
+  return concat_strings(second=s1, first=s2)
+
 if __name__ == "__main__":
   start() # SDK entry point, required for all workflow services
